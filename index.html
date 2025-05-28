@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>先行後攻ランダム決定</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      margin-top: 100px;
+    }
+    #result {
+      font-size: 2em;
+      margin-top: 20px;
+      color: #333;
+    }
+    button {
+      font-size: 1.2em;
+      padding: 10px 20px;
+      border-radius: 10px;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <h1>先行・後攻 ランダム決定</h1>
+  <button onclick="decideOrder()">決める！</button>
+  <div id="result"></div>
+
+  <script>
+    function decideOrder() {
+      const orders = ["先行", "後攻"];
+      const result = orders[Math.floor(Math.random() * orders.length)];
+      document.getElementById("result").textContent = "あなたは「" + result + "」です！";
+    }
+  </script>
+</body>
+</html>
