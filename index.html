@@ -1,43 +1,130 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>先行後攻ランダム決定</title>
   <style>
+    :root {
+      --color-bg-light: #f0f0f0;
+      --color-text-light: #333;
+      --color-bg-dark: #1e1e1e;
+      --color-text-dark: #eee;
+      --color-senkou: #4CAF50;
+      --color-koukou: #2196F3;
+    }
+
     body {
-      font-family: sans-serif;
+      font-family: "Segoe UI", sans-serif;
       text-align: center;
-      margin-top: 100px;
+      padding: 40px 20px;
+      background-color: var(--color-bg-light);
+      color: var(--color-text-light);
+      transition: background-color 0.3s, color 0.3s;
     }
-    #result {
-      font-size: 2em;
-      margin-top: 20px;
-      color: #333;
+
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: var(--color-bg-dark);
+        color: var(--color-text-dark);
+      }
     }
+
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 40px;
+    }
+
+    .center {
+      display: flex;
+      justify-content: center;
+    }
+
     button {
-      font-size: 1.2em;
-      padding: 10px 20px;
-      border-radius: 10px;
-      border: none;
-      background-color: #4CAF50;
+      font-size: 1.5rem;
+      padding: 16px 32px;
+      border-radius: 12px;
+      background-color: #673ab7;
       color: white;
+      border: none;
       cursor: pointer;
+      transition: transform 0.2s ease, background-color 0.3s;
     }
+
     button:hover {
-      background-color: #45a049;
+      background-color: #5e35b1;
+      transform: scale(1.05);
+    }
+
+    #result {
+      font-size: 2rem;
+      margin-top: 30px;
+      padding: 20px;
+      border-radius: 10px;
+      display: inline-block;
+      min-width: 250px;
+      transition: background-color 0.3s ease, transform 0.3s;
+    }
+
+    #result.senkou {
+      background-color: var(--color-senkou);
+      color: white;
+    }
+
+    #result.koukou {
+      background-color: var(--color-koukou);
+      color: white;
+    }
+
+    .icon {
+      font-size: 2rem;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+
+    /* スマホ対応 */
+    @media screen and (max-width: 600px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      button {
+        width: 90%;
+        font-size: 1.6rem;
+        padding: 18px;
+      }
+
+      #result {
+        font-size: 1.8rem;
+        width: 90%;
+      }
     }
   </style>
 </head>
 <body>
   <h1>先行・後攻 ランダム決定</h1>
-  <button onclick="decideOrder()">決める！</button>
+  <div class="center">
+    <button onclick="decideOrder()">決める！</button>
+  </div>
   <div id="result"></div>
 
   <script>
     function decideOrder() {
-      const orders = ["先行", "後攻"];
-      const result = orders[Math.floor(Math.random() * orders.length)];
-      document.getElementById("result").textContent = "あなたは「" + result + "」です！";
+      const resultEl = document.getElementById("result");
+      const isSenkou = Math.random() < 0.5;
+      const icon = isSenkou ? "⚔️" : "🛡️";
+      const text = isSenkou ? "あなたは「先行」です！" : "あなたは「後攻」です！";
+
+      resultEl.textContent = ""; // 初期化
+      resultEl.classList.remove("senkou", "koukou");
+
+      // アニメーション用に一瞬縮めてから戻す
+      resultEl.style.transform = "scale(0.8)";
+      setTimeout(() => {
+        resultEl.innerHTML = `<span class="icon">${icon}</span>${text}`;
+        resultEl.classList.add(isSenkou ? "senkou" : "koukou");
+        resultEl.style.transform = "scale(1)";
+      }, 100);
     }
   </script>
 </body>
