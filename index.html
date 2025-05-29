@@ -24,18 +24,12 @@
       transition: background-color 0.3s, color 0.3s;
     }
 
-   @media screen and (max-width: 600px) {
-     .center {
-     flex-direction: column;
-     gap: 10px; /* ボタン間の隙間 */
-     }
-
-     .result-box {
-     width: 90%;
-     font-size: 1.8rem;
-     margin: 10px auto 30px auto; /* 上10 下30 */
-     }
-    } 
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: var(--color-bg-dark);
+        color: var(--color-text-dark);
+      }
+    }
 
     h1 {
       font-size: 2.2rem;
@@ -45,7 +39,7 @@
     .center {
       display: flex;
       justify-content: center;
-      margin-bottom: 30%;
+      margin-bottom: 30px; /* ✅ 余白追加 */
     }
 
     button {
@@ -67,11 +61,11 @@
     .result-box {
       font-size: 2rem;
       margin-top: 20px;
-      margin-bottom: 30px; /* 追加 */
+      margin-bottom: 20px; /* ✅ 結果表示にも余白追加 */
       padding: 20px;
       border-radius: 10px;
       display: inline-block;
-       min-width: 250px;
+      min-width: 250px;
       transition: background-color 0.3s ease, transform 0.3s;
     }
 
