@@ -12,6 +12,7 @@
       --color-text-dark: #eee;
       --color-senkou: #4CAF50;
       --color-koukou: #2196F3;
+      --color-random: #ff9800;
     }
 
     body {
@@ -38,6 +39,7 @@
     .center {
       display: flex;
       justify-content: center;
+      margin-bottom: 20px;
     }
 
     button {
@@ -56,9 +58,9 @@
       transform: scale(1.05);
     }
 
-    #result {
+    .result-box {
       font-size: 2rem;
-      margin-top: 30px;
+      margin-top: 20px;
       padding: 20px;
       border-radius: 10px;
       display: inline-block;
@@ -66,13 +68,18 @@
       transition: background-color 0.3s ease, transform 0.3s;
     }
 
-    #result.senkou {
+    .senkou {
       background-color: var(--color-senkou);
       color: white;
     }
 
-    #result.koukou {
+    .koukou {
       background-color: var(--color-koukou);
+      color: white;
+    }
+
+    .random {
+      background-color: var(--color-random);
       color: white;
     }
 
@@ -82,7 +89,6 @@
       vertical-align: middle;
     }
 
-    /* スマホ対応 */
     @media screen and (max-width: 600px) {
       h1 {
         font-size: 1.8rem;
@@ -94,7 +100,7 @@
         padding: 18px;
       }
 
-      #result {
+      .result-box {
         font-size: 1.8rem;
         width: 90%;
       }
@@ -103,10 +109,18 @@
 </head>
 <body>
   <h1>先行・後攻 ランダム決定</h1>
+
+  <!-- 先行後攻ボタン -->
   <div class="center">
     <button onclick="decideOrder()">決める！</button>
   </div>
-  <div id="result"></div>
+  <div id="result" class="result-box"></div>
+
+  <!-- ランダム単語ボタン -->
+  <div class="center">
+    <button onclick="showRandomWord()">単語をランダムに表示</button>
+  </div>
+  <div id="wordResult" class="result-box"></div>
 
   <script>
     function decideOrder() {
@@ -115,15 +129,30 @@
       const icon = isSenkou ? "⚔️" : "🛡️";
       const text = isSenkou ? "あなたは「先行」です！" : "あなたは「後攻」です！";
 
-      resultEl.textContent = ""; // 初期化
-      resultEl.classList.remove("senkou", "koukou");
-
-      // アニメーション用に一瞬縮めてから戻す
+      resultEl.textContent = "";
+      resultEl.className = "result-box";
       resultEl.style.transform = "scale(0.8)";
+
       setTimeout(() => {
         resultEl.innerHTML = `<span class="icon">${icon}</span>${text}`;
         resultEl.classList.add(isSenkou ? "senkou" : "koukou");
         resultEl.style.transform = "scale(1)";
+      }, 100);
+    }
+
+    function showRandomWord() {
+      const words = ["ドラゴン", "ナイト", "ウィザード", "アーチャー", "ゴブリン", "フェニックス", "トラップ", "マジック", "バトル", "チャンピオン"];
+      const randomWord = words[Math.floor(Math.random() * words.length)];
+
+      const wordResultEl = document.getElementById("wordResult");
+      wordResultEl.textContent = "";
+      wordResultEl.className = "result-box";
+      wordResultEl.style.transform = "scale(0.8)";
+
+      setTimeout(() => {
+        wordResultEl.innerHTML = `<span class="icon">🎲</span>${randomWord}`;
+        wordResultEl.classList.add("random");
+        wordResultEl.style.transform = "scale(1)";
       }, 100);
     }
   </script>
