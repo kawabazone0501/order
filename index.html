@@ -36,10 +36,10 @@
       margin-bottom: 40px;
     }
 
-    .center {
+    .button-wrapper {
       display: flex;
       justify-content: center;
-      margin-bottom: 30px; /* ✅ 余白追加 */
+      margin-bottom: 20px;
     }
 
     button {
@@ -60,8 +60,7 @@
 
     .result-box {
       font-size: 2rem;
-      margin-top: 20px;
-      margin-bottom: 20px; /* ✅ 結果表示にも余白追加 */
+      margin: 20px auto 40px auto;
       padding: 20px;
       border-radius: 10px;
       display: inline-block;
@@ -104,6 +103,13 @@
       .result-box {
         font-size: 1.8rem;
         width: 90%;
+        margin: 10px auto 30px auto;
+      }
+
+      .button-wrapper {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
       }
     }
   </style>
@@ -112,14 +118,14 @@
   <h1>先行・後攻 ランダム決定</h1>
 
   <!-- 先行後攻ボタン -->
-  <div class="center">
+  <div class="button-wrapper">
     <button onclick="decideOrder()">決める！</button>
   </div>
   <div id="result" class="result-box"></div>
 
   <!-- ランダム単語ボタン -->
-  <div class="center">
-    <button onclick="showRandomWord()">仮想敵を決める</button>
+  <div class="button-wrapper">
+    <button onclick="showRandomWord()">単語をランダムに表示</button>
   </div>
   <div id="wordResult" class="result-box"></div>
 
@@ -142,7 +148,7 @@
     }
 
     function showRandomWord() {
-      const words = ["デイガファイアーバード", "4cペテンバース", "ラッカゴスペル", "黒緑ゼニス", "青黒COMPLEX", "白青天門", "クローシス覇覇覇ジャオウガ", "リースボルシャック", "青黒魔導具", ];
+      const words = ["デイガファイアーバード", "4cペテンバース", "ラッカゴスペル", "黒緑ゼニス", "青黒COMPLEX", "白青天門", "クローシス覇覇覇ジャオウガ", "リースボルシャック", "青黒魔導具", ]; 
       const randomWord = words[Math.floor(Math.random() * words.length)];
 
       const wordResultEl = document.getElementById("wordResult");
