@@ -89,14 +89,6 @@
       vertical-align: middle;
     }
 
-    .word-image {
-      margin-top: 15px;
-      max-width: 100%;
-      height: auto;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    }
-
     @media screen and (max-width: 600px) {
       h1 {
         font-size: 1.8rem;
@@ -156,37 +148,30 @@
     }
 
     function showRandomWord() {
-      const wordData  = [
-        {word: "デイガファイアーバード", img: "image/queen.jpg"},
-        {word: "4cペテンバース", img: "image/burakio.jpg"},
-        {word: "ラッカゴスペル", img: "image/gosuperu.jpg"},
-        {word: "黒緑ゼニス", img: "image/beethoven.jpg"},
-        {word: "青黒COMPLEX", img: "image/complex.jpg"},
-        {word: "白青天門", img: "image/arcadia.jpg"},
-        {word: "クローシス覇覇覇ジャオウガ", img: "image/jaouga.jpg"},
-        {word: "リースボルシャック", img: "image/bacterius.jpg"},
-        {word: "青黒魔導具", img: "image/galumise.jpg"},
-        {word: "ドリームメイト", img: "image/,meisama.jpg"},
-      ]; 
+      const words = [
+        "デイガファイアーバード", 
+        "4cペテンバース",
+        "ラッカゴスペル", 
+        "黒緑ゼニス",
+        "青黒COMPLEX", 
+        "白青天門", 
+        "クローシス覇覇覇ジャオウガ", 
+        "リースボルシャック", 
+        "青黒魔導具", 
+        "ドリームメイト",]; 
+      const randomWord = words[Math.floor(Math.random() * words.length)];
 
-    function showRandomWord() {
-    const wordResultEl = document.getElementById("wordResult");
-    const randomEntry = wordData[Math.floor(Math.random() * wordData.length)];
+      const wordResultEl = document.getElementById("wordResult");
+      wordResultEl.textContent = "";
+      wordResultEl.className = "result-box";
+      wordResultEl.style.transform = "scale(0.8)";
 
-    wordResultEl.textContent = "";
-    wordResultEl.className = "result-box";
-    wordResultEl.style.transform = "scale(0.8)";
-
-    setTimeout(() => {
-      wordResultEl.innerHTML = `
-        <div><span class="icon">🎲</span>${randomEntry.word}</div>
-        <img src="${randomEntry.img}" alt="${randomEntry.word}" class="word-image" />
-      `;
-      wordResultEl.classList.add("random");
-      wordResultEl.style.transform = "scale(1)";
-    }, 100);
-  }
-}
+      setTimeout(() => {
+        wordResultEl.innerHTML = `<span class="icon">🎲</span>${randomWord}`;
+        wordResultEl.classList.add("random");
+        wordResultEl.style.transform = "scale(1)";
+      }, 100);
+    }
   </script>
 </body>
 </html>
